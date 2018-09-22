@@ -1,9 +1,17 @@
 import React from 'react';
 
-import Enzyme, { shallow } from 'enzyme';
-import Hello from '../hello/index';
+import { shallow } from 'enzyme';
+import Hello from '../hello';
 
-it('renders properly', () => {
-	const wrapper = shallow(<Hello name="CodeSandbox" />);
-	expect(wrapper.text()).toEqual('Hello CodeSandbox!');
+describe('Hello', () => {
+  it('should render a <h1 />', () => {
+		const wrapper = shallow(<Hello />);
+    expect(wrapper.find('h1').length).toEqual(1);
+	});
+
+	it('shows a hello custom message given we pass a name as prop', () => {
+		const name = 'Guest';
+		const wrapper = shallow(<Hello name={name} />);
+		expect(wrapper.text()).toEqual(`Hello ${name}!`);
+	});
 });
